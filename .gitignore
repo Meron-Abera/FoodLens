@@ -1,0 +1,12 @@
+# Training outputs (checkpoints, predictions) are recreated by notebooks/02_models.ipynb
+outputs/
+*.pt
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+
+# Editors / OS
+.idea/
+.DS_Store

@@ -12,6 +12,12 @@ def train_transform(image_size=IMAGE_SIZE):
 
     The augmentation shows the model a slightly different version of each photo every epoch,
     which reduces overfitting and makes it less sensitive to the over-saturated photos found in the EDA.
+
+    Args:
+        image_size: Side length of the square crop fed to the model.
+
+    Returns:
+        A torchvision transform that turns a PIL image into a normalized tensor.
     """
     return transforms.Compose([
         transforms.RandomResizedCrop(image_size, scale=(0.5, 1.0)),
@@ -23,7 +29,14 @@ def train_transform(image_size=IMAGE_SIZE):
 
 
 def eval_transform(image_size=IMAGE_SIZE):
-    """Returns the evaluation transform: resize the shorter side, center-crop, normalize."""
+    """Returns the evaluation transform: resize the shorter side, center-crop, normalize.
+
+    Args:
+        image_size: Side length of the square center crop fed to the model.
+
+    Returns:
+        A torchvision transform that turns a PIL image into a normalized tensor.
+    """
     return transforms.Compose([
         transforms.Resize(RESIZE_SIZE),
         transforms.CenterCrop(image_size),

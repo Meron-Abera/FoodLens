@@ -26,6 +26,10 @@ def build_efficientnet_b0(num_classes, pretrained=True):
 def load_trained_efficientnet_b0(checkpoint, device='cpu'):
     """Rebuilds a trained EfficientNet-B0 from a checkpoint saved by `src.models.train`.
 
+    Args:
+        checkpoint: Path to the `.pt` file.
+        device: Device to load the weights onto, e.g. 'cpu', 'mps' or 'cuda'.
+
     Returns:
         The model in eval mode, its number of classes, and the training history.
     """

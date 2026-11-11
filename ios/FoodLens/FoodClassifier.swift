@@ -58,13 +58,15 @@ final class FoodClassifier: @unchecked Sendable {
     ///
     /// Runs synchronously, so call it off the main thread.
     func classify(_ image: UIImage, topK: Int = 3) throws -> [Prediction] {
-        guard let cgImage = image.cgImage else { throw ClassifierError.invalidImage }
+        guard let cgImage = image.cgImage, let pixelBuffer = makeBGRAPixelBuffer(from: cgImage) else {
+            throw ClassifierError.invalidImage
+        }
 
         let request = VNCoreMLRequest(model: model)
         // Scale the shorter side to 224 px and crop the center, like the notebook's evaluation transform.
         request.imageCropAndScaleOption = .centerCrop
 
-        let handler = VNImageRequestHandler(cgImage: cgImage,
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
                                             orientation: CGImagePropertyOrientation(image.imageOrientation))
         try handler.perform([request])
 

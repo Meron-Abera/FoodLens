@@ -8,7 +8,16 @@ from sklearn.metrics import precision_recall_fscore_support
 
 @torch.no_grad()
 def predict(model, loader, device):
-    """Returns the softmax probabilities for every image in `loader`, shape (N, num_classes)."""
+    """Predicts class probabilities for every image in `loader`.
+
+    Args:
+        model: Trained classifier that returns logits.
+        loader: DataLoader yielding (images, targets) batches; targets are ignored.
+        device: Device the model is on.
+
+    Returns:
+        Softmax probabilities as a NumPy array of shape (N, num_classes), in loader order.
+    """
     model.eval()
     return torch.cat([F.softmax(model(x.to(device)), dim=1).cpu() for x, _ in loader]).numpy()
 
@@ -42,7 +51,14 @@ def predictions_table(test_df, probs, class_names):
 
 
 def save_predictions(name, table, probs, out_dir):
-    """Writes `predictions_<name>.csv` and `probs_<name>.npy` to `out_dir`."""
+    """Writes `predictions_<name>.csv` and `probs_<name>.npy` to `out_dir`.
+
+    Args:
+        name: Model name used in the file names, e.g. 'efficientnet_b0_ce'.
+        table: Output of `predictions_table`.
+        probs: Softmax probabilities, shape (N, num_classes).
+        out_dir: Existing folder to write the files to.
+    """
     table.to_csv(out_dir / f'predictions_{name}.csv', index=False)
     np.save(out_dir / f'probs_{name}.npy', probs)
 

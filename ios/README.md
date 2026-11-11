@@ -19,6 +19,16 @@ The repository already includes the exported focal loss model, so the app works 
 
 Any model works as long as it keeps the same contract: an RGB image input of 224×224 and classifier output labels that match the Food-101 folder names (e.g. `pad_thai`).
 
+## Nutrition and cuisine warnings
+
+Under the top prediction, the app shows approximate nutrition per serving and, for cuisines the audit flagged as less accurate, a "Heads up" warning with that cuisine's test accuracy. It reads three CSV files bundled in `FoodLens/Data/`, copied from `data/`. After rerunning `notebooks/03_audit.ipynb` or editing the data files, copy them again from the repository root:
+
+```bash
+cp data/nutrition.csv data/cuisine_map.csv data/cuisine_reliability.csv ios/FoodLens/Data/
+```
+
+`cuisine_reliability.csv` must come from the same model as the bundled one (`DEPLOYED` in step 8 of the audit notebook).
+
 ## Running
 
 - **Simulator:** open `FoodLens.xcodeproj`, pick an iPhone simulator, and press Run. Use **Photos**; drag food images onto the simulator window to add them to its photo library. (Older simulators have no camera, so **Camera** is hidden there.)
@@ -32,5 +42,7 @@ Any model works as long as it keeps the same contract: an RGB image input of 224
 | `ContentView.swift` | Main screen: photo, buttons, results |
 | `ClassifierViewModel.swift` | Holds the photo and predictions; runs the classifier off the main thread |
 | `FoodClassifier.swift` | Loads the Core ML model and classifies images with Vision |
-| `PredictionView.swift` | Top prediction, confidence, low-confidence warning and runner-ups |
+| `PredictionView.swift` | Top prediction, confidence, low-confidence and cuisine warnings, nutrition and runner-ups |
+| `DishInfo.swift` | Reads the bundled CSVs: nutrition per dish and accuracy of flagged cuisines |
+| `Data/` | Copies of `nutrition.csv`, `cuisine_map.csv` and `cuisine_reliability.csv` |
 | `CameraPicker.swift` | Wraps the system camera for SwiftUI |

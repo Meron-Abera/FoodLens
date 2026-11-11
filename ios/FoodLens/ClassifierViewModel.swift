@@ -12,9 +12,10 @@ final class ClassifierViewModel {
 
     private let classifier: FoodClassifier?
     private let loadError: Error?
+    private let dishInfo = DishInfoStore()
 
-    /// Below this confidence the app tells the user the model is unsure.
-    static let lowConfidenceThreshold = 0.5
+    /// Below this confidence the app tells the user the model is unsure and lists its top guesses.
+    static let lowConfidenceThreshold = 0.6
 
     init() {
         do {
@@ -31,6 +32,12 @@ final class ClassifierViewModel {
 
     /// Message explaining why the model couldn't be loaded, if it couldn't.
     var modelLoadMessage: String? { loadError?.localizedDescription }
+
+    /// Approximate nutrition for the top prediction.
+    var topNutrition: Nutrition? { predictions.first.flatMap { dishInfo.nutrition(for: $0.label) } }
+
+    /// Set when the top prediction's cuisine was less accurate in testing.
+    var topLowReliability: CuisineReliability? { predictions.first.flatMap { dishInfo.lowReliability(for: $0.label) } }
 
     /// Shows `newImage` and replaces the predictions with the model's output for it.
     func classify(_ newImage: UIImage) async {

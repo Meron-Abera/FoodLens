@@ -90,10 +90,9 @@ Hyperparameters: 224×224 input, batch size 64, 5 epochs, AdamW (weight decay 1e
 
 ```bash
 python -m src.models.export_coreml --checkpoint outputs/full/efficientnet_b0_focal.pt
-cp -R models/Food101Classifier.mlpackage ios/FoodLens/
 ```
 
-Then open `ios/FoodLens.xcodeproj` in Xcode 16 or later. See [ios/README.md](ios/README.md) for details, including running on an iPhone.
+This writes `ios/FoodLens/Food101Classifier.mlpackage`, which the app picks up on the next build. The repository already includes the exported focal loss model. Then open `ios/FoodLens.xcodeproj` in Xcode 16 or later. See [ios/README.md](ios/README.md) for details, including running on an iPhone.
 
 ## Data
 

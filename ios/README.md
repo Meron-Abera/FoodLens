@@ -6,15 +6,16 @@ Requires Xcode 16 or later and iOS 17 or later.
 
 ## Adding the model
 
-The app looks for a Core ML model named **`Food101Classifier`**. Until one is added, it builds and runs but shows a setup message.
+The app looks for a Core ML model named **`Food101Classifier`**. Without one, it still builds and runs but shows a setup message.
 
 1. Export a trained checkpoint from the repository root:
    ```bash
    python -m src.models.export_coreml --checkpoint outputs/full/efficientnet_b0_focal.pt
    ```
-   This writes `models/Food101Classifier.mlpackage` (~8 MB), with ImageNet normalization, softmax and the 101 class labels built in.
-2. Copy `Food101Classifier.mlpackage` into `ios/FoodLens/`. The project syncs with that folder, so Xcode picks the model up automatically; no project settings need to change.
-3. Build and run.
+   This writes `ios/FoodLens/Food101Classifier.mlpackage` (~8 MB), with ImageNet normalization, softmax and the 101 class labels built in. The project syncs with that folder, so Xcode picks the model up automatically; no project settings need to change.
+2. Build and run.
+
+The repository already includes the exported focal loss model, so the app works without retraining.
 
 Any model works as long as it keeps the same contract: an RGB image input of 224×224 and classifier output labels that match the Food-101 folder names (e.g. `pad_thai`).
 

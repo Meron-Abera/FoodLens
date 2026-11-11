@@ -12,4 +12,4 @@ FOOD101_DIR = DATA_DIR / 'food-101'          # downloaded by `python -m src.data
 CLEAN_INDEX = DATA_DIR / 'food101_clean.csv'  # written by notebooks/01_eda.ipynb
 
 OUTPUTS_DIR = REPO_ROOT / 'outputs'           # checkpoints and predictions from notebooks/02_models.ipynb
-MODELS_DIR = REPO_ROOT / 'models'             # exported Core ML model
+IOS_MODEL = REPO_ROOT / 'ios' / 'FoodLens' / 'Food101Classifier.mlpackage'  # Core ML model bundled with the app

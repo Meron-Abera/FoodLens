@@ -7,7 +7,8 @@ are built into the model, and the class labels are embedded in it.
 Usage (from the repository root):
     python -m src.models.export_coreml --checkpoint outputs/full/efficientnet_b0_focal.pt
 
-Then drag the resulting Food101Classifier.mlpackage into ios/FoodLens/ in Xcode.
+By default the model is written to ios/FoodLens/, where the app picks it up
+automatically on the next build.
 """
 import argparse
 from pathlib import Path
@@ -18,7 +19,7 @@ import torch
 import torch.nn as nn
 from torchvision import models
 
-from src.paths import CLEAN_INDEX, MODELS_DIR
+from src.paths import CLEAN_INDEX, IOS_MODEL
 
 IMAGE_SIZE = 224
 MEAN = [0.485, 0.456, 0.406]
@@ -90,7 +91,7 @@ def export(checkpoint, output, index_csv=CLEAN_INDEX):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--checkpoint', required=True, type=Path, help='.pt file saved by 02_models.ipynb')
-    parser.add_argument('--output', type=Path, default=MODELS_DIR / 'Food101Classifier.mlpackage')
+    parser.add_argument('--output', type=Path, default=IOS_MODEL, help='defaults to the iOS app folder')
     parser.add_argument('--index', type=Path, default=CLEAN_INDEX, help='food101_clean.csv from 01_eda.ipynb')
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)

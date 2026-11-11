@@ -1,5 +1,10 @@
-# Training outputs (checkpoints, predictions) are recreated by notebooks/02_models.ipynb
-outputs/
+# Training outputs: commit the full run's predictions and results (inputs to the cuisine audit),
+# but not checkpoints, logs or quick-test runs, which notebooks/02_models.ipynb recreates
+outputs/*
+!outputs/full/
+outputs/full/*
+!outputs/full/*.csv
+!outputs/full/*.npy
 *.pt
 
 # Python

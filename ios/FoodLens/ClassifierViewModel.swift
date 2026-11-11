@@ -14,8 +14,8 @@ final class ClassifierViewModel {
     private let loadError: Error?
     private let dishInfo = DishInfoStore()
 
-    /// Below this confidence the app tells the user the model is unsure.
-    static let lowConfidenceThreshold = 0.5
+    /// Below this confidence the app tells the user the model is unsure and lists its top guesses.
+    static let lowConfidenceThreshold = 0.6
 
     init() {
         do {

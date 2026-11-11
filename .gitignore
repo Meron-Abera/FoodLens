@@ -15,3 +15,7 @@ __pycache__/
 xcuserdata/
 DerivedData/
 *.xcuserstate
+
+# Dataset (downloaded by `python -m src.data.download`) and the index built from it by 01_eda.ipynb
+data/food-101/
+data/food101_clean.csv

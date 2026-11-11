@@ -18,10 +18,11 @@ import torch
 import torch.nn as nn
 from torchvision import models
 
+from src.paths import CLEAN_INDEX, MODELS_DIR
+
 IMAGE_SIZE = 224
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
-DEFAULT_INDEX = Path.home() / 'Downloads' / 'food-101' / 'food101_clean.csv'
 
 
 class DeployableClassifier(nn.Module):
@@ -66,7 +67,7 @@ def class_labels(index_csv, num_classes):
     return sorted(pd.read_csv(index_csv)['label'].unique())[:num_classes]
 
 
-def export(checkpoint, output, index_csv=DEFAULT_INDEX):
+def export(checkpoint, output, index_csv=CLEAN_INDEX):
     """Converts a checkpoint to a Core ML classifier saved at `output`."""
     model, num_classes = load_checkpoint(checkpoint)
     labels = class_labels(index_csv, num_classes)
@@ -89,8 +90,8 @@ def export(checkpoint, output, index_csv=DEFAULT_INDEX):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--checkpoint', required=True, type=Path, help='.pt file saved by 02_models.ipynb')
-    parser.add_argument('--output', type=Path, default=Path('models/Food101Classifier.mlpackage'))
-    parser.add_argument('--index', type=Path, default=DEFAULT_INDEX, help='food101_clean.csv from 01_eda.ipynb')
+    parser.add_argument('--output', type=Path, default=MODELS_DIR / 'Food101Classifier.mlpackage')
+    parser.add_argument('--index', type=Path, default=CLEAN_INDEX, help='food101_clean.csv from 01_eda.ipynb')
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     export(args.checkpoint, args.output, args.index)

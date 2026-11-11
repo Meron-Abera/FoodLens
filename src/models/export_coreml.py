@@ -36,7 +36,14 @@ class DeployableClassifier(nn.Module):
         self.register_buffer('std', torch.tensor(IMAGENET_STD).view(1, 3, 1, 1))
 
     def forward(self, image):
-        """Classifies a batch of RGB images with pixel values in [0, 1]."""
+        """Classifies a batch of RGB images.
+
+        Args:
+            image: Tensor of shape (N, 3, H, W) with pixel values in [0, 1].
+
+        Returns:
+            Class probabilities, shape (N, num_classes).
+        """
         return torch.softmax(self.model((image - self.mean) / self.std), dim=1)
 
 
@@ -46,12 +53,25 @@ def class_labels(index_csv, num_classes):
     Training (`src.data.food101_data.load_splits`) sorts the labels alphabetically and,
     in quick-test mode, keeps the first few, so taking the first `num_classes` sorted
     labels reproduces its order for both the full and the quick-test model.
+
+    Args:
+        index_csv: The cleaned index CSV written by notebooks/01_eda.ipynb.
+        num_classes: Number of classes the model was trained on.
+
+    Returns:
+        List of label names, index i being class i.
     """
     return sorted(pd.read_csv(index_csv)['label'].unique())[:num_classes]
 
 
 def export(checkpoint, output, index_csv=CLEAN_INDEX):
-    """Converts a checkpoint to a Core ML classifier saved at `output`."""
+    """Converts a checkpoint to a Core ML classifier saved at `output`.
+
+    Args:
+        checkpoint: `.pt` file saved by notebooks/02_models.ipynb.
+        output: Path of the `.mlpackage` to write.
+        index_csv: The cleaned index CSV, used to recover the class labels in training order.
+    """
     import coremltools as ct  # imported here so the rest of the module works where coremltools isn't installed
 
     model, num_classes, _ = load_trained_efficientnet_b0(checkpoint)

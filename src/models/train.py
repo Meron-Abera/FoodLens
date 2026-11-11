@@ -10,6 +10,13 @@ from src.models.architectures import build_efficientnet_b0, load_trained_efficie
 def run_epoch(model, loader, loss_fn, device, optimizer=None):
     """Runs one pass over `loader`; trains if an optimizer is given, otherwise only evaluates.
 
+    Args:
+        model: Network on `device`.
+        loader: DataLoader yielding (images, targets) batches.
+        loss_fn: Loss taking (logits, targets).
+        device: Device to move each batch to.
+        optimizer: If given, the weights are updated after every batch.
+
     Returns:
         (mean loss, accuracy) over the pass.
     """
@@ -42,8 +49,11 @@ def fine_tune(model, head, loss_fn, train_loader, val_loader, checkpoint, config
         model: Network to train, already on `device`.
         head: The model's new classifier layer.
         loss_fn: Loss taking (logits, targets).
+        train_loader: Training batches.
+        val_loader: Validation batches, used to pick the best epoch.
         checkpoint: Path where the best weights and the full history are saved.
         config: Dict with 'epochs', 'lr_backbone', 'lr_head' and 'weight_decay'.
+        device: Device the model is on.
 
     Returns:
         A list with one dict of metrics per epoch. `model` ends up holding the best weights.
@@ -80,6 +90,16 @@ def train_or_load(name, loss_fn, train_loader, val_loader, num_classes, config, 
 
     Loading instead of retraining means the notebook can be re-run without hours of training;
     delete the checkpoint to retrain.
+
+    Args:
+        name: Model name; the checkpoint is saved as `out_dir/name.pt`.
+        loss_fn: Loss taking (logits, targets).
+        train_loader: Training batches.
+        val_loader: Validation batches.
+        num_classes: Number of output classes.
+        config: Training settings passed to `fine_tune`.
+        device: Device to train on.
+        out_dir: Folder for the checkpoint.
 
     Returns:
         (model, history DataFrame).

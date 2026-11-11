@@ -18,7 +18,14 @@ FOOD101_URL = 'https://data.vision.ee.ethz.ch/cvl/food-101.tar.gz'
 
 
 def is_downloaded(data_dir):
-    """Returns True if data_dir already contains the unpacked dataset."""
+    """Checks whether the unpacked dataset is already in `data_dir`.
+
+    Args:
+        data_dir: Folder expected to contain `food-101/`.
+
+    Returns:
+        True if both the images folder and the official train split file exist.
+    """
     food101 = data_dir / 'food-101'
     return (food101 / 'images').is_dir() and (food101 / 'meta' / 'train.txt').is_file()
 
@@ -31,7 +38,17 @@ def _report_progress(blocks, block_size, total_size):
 
 
 def download(data_dir=DATA_DIR, url=FOOD101_URL):
-    """Downloads and unpacks Food-101 so the images end up in data_dir/food-101/images."""
+    """Downloads and unpacks Food-101 so the images end up in data_dir/food-101/images.
+
+    Does nothing if the dataset is already there. The archive is deleted after unpacking.
+
+    Args:
+        data_dir: Folder to put `food-101/` in.
+        url: Address of the Food-101 archive.
+
+    Raises:
+        RuntimeError: If the unpacked archive doesn't look like Food-101.
+    """
     data_dir = Path(data_dir)
     if is_downloaded(data_dir):
         print(f'Food-101 is already in {data_dir / "food-101"}; nothing to do.')

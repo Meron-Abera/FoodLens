@@ -19,7 +19,15 @@ class FocalLoss(nn.Module):
         self.gamma = gamma
 
     def forward(self, logits, targets):
-        """Returns the mean focal loss for a batch of logits (N, C) and class indices (N,)."""
+        """Computes the mean focal loss over a batch.
+
+        Args:
+            logits: Raw model outputs, shape (N, C).
+            targets: Correct class index for each example, shape (N,).
+
+        Returns:
+            The mean loss as a scalar tensor.
+        """
         log_p = F.log_softmax(logits, dim=1).gather(1, targets.unsqueeze(1)).squeeze(1)
         p = log_p.exp()
         return (-(1 - p) ** self.gamma * log_p).mean()

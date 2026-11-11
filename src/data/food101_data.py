@@ -57,6 +57,17 @@ def load_splits(index_csv=CLEAN_INDEX, data_dir=FOOD101_DIR, num_classes=None):
 
 
 def make_loader(df, transform, batch_size, shuffle, num_workers=0):
-    """Wraps a split in a DataLoader that reads images in `num_workers` background processes."""
+    """Wraps a split in a DataLoader that reads images in `num_workers` background processes.
+
+    Args:
+        df: One split from `load_splits`, with 'path' and 'target' columns.
+        transform: Applied to each image, e.g. `train_transform()` or `eval_transform()`.
+        batch_size: Images per batch.
+        shuffle: Whether to reshuffle the images every epoch (True for training only).
+        num_workers: Background processes that load images; 0 loads them in the main process.
+
+    Returns:
+        A DataLoader yielding (images, targets) batches.
+    """
     return DataLoader(FoodDataset(df, transform), batch_size=batch_size, shuffle=shuffle,
                       num_workers=num_workers, persistent_workers=num_workers > 0)

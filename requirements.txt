@@ -1,0 +1,24 @@
+# Python packages for the FoodLens notebooks and scripts (tested with Python 3.13).
+# Install into a fresh virtual environment:
+#   python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+
+# Data analysis and plotting (01_eda.ipynb)
+numpy==2.5.2
+pandas==3.0.5
+matplotlib==3.11.1
+seaborn==0.13.2
+pillow==12.3.0
+
+# Model training and evaluation (02_models.ipynb)
+torch==2.14.1
+torchvision==0.29.1
+scikit-learn==1.9.1
+
+# Core ML export for the iOS app (src/models/export_coreml.py); not available on Windows
+coremltools==9.0; sys_platform != "win32"
+
+# Runs the notebooks in Jupyter, VS Code or PyCharm
+ipykernel==7.3.0
+
+# Tests (run with: python -m pytest)
+pytest==9.2.0

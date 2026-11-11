@@ -10,3 +10,8 @@ __pycache__/
 # Editors / OS
 .idea/
 .DS_Store
+
+# Xcode
+xcuserdata/
+DerivedData/
+*.xcuserstate

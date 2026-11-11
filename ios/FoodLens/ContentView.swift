@@ -30,7 +30,9 @@ struct ContentView: View {
                         Label(message, systemImage: "exclamationmark.triangle")
                             .foregroundStyle(.red)
                     } else if !viewModel.predictions.isEmpty {
-                        PredictionView(predictions: viewModel.predictions)
+                        PredictionView(predictions: viewModel.predictions,
+                                       nutrition: viewModel.topNutrition,
+                                       lowReliability: viewModel.topLowReliability)
                     }
                 }
                 .padding()

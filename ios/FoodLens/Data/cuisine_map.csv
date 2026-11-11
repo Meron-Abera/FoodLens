@@ -1,0 +1,102 @@
+label,name,cuisine_group,food_group
+apple_pie,Apple pie,Western,North American
+baby_back_ribs,Baby back ribs,Western,North American
+baklava,Baklava,Middle Eastern,Middle Eastern
+beef_carpaccio,Beef carpaccio,Western,Italian
+beef_tartare,Beef tartare,Western,French
+beet_salad,Beet salad,Other,International
+beignets,Beignets,Western,French
+bibimbap,Bibimbap,East Asian,East Asian
+bread_pudding,Bread pudding,Western,Other European
+breakfast_burrito,Breakfast burrito,Western,North American
+bruschetta,Bruschetta,Western,Italian
+caesar_salad,Caesar salad,Other,International
+cannoli,Cannoli,Western,Italian
+caprese_salad,Caprese salad,Western,Italian
+carrot_cake,Carrot cake,Western,North American
+ceviche,Ceviche,Latin American,Latin American
+cheese_plate,Cheese plate,Western,Other European
+cheesecake,Cheesecake,Other,International
+chicken_curry,Chicken curry,South Asian,South Asian
+chicken_quesadilla,Chicken quesadilla,Latin American,Latin American
+chicken_wings,Chicken wings,Western,North American
+chocolate_cake,Chocolate cake,Other,International
+chocolate_mousse,Chocolate mousse,Western,French
+churros,Churros,Latin American,Latin American
+clam_chowder,Clam chowder,Western,North American
+club_sandwich,Club sandwich,Western,North American
+crab_cakes,Crab cakes,Western,North American
+creme_brulee,Creme brulee,Western,French
+croque_madame,Croque madame,Western,French
+cup_cakes,Cup cakes,Western,North American
+deviled_eggs,Deviled eggs,Western,North American
+donuts,Donuts,Western,North American
+dumplings,Dumplings,East Asian,East Asian
+edamame,Edamame,East Asian,East Asian
+eggs_benedict,Eggs benedict,Western,North American
+escargots,Escargots,Western,French
+falafel,Falafel,Middle Eastern,Middle Eastern
+filet_mignon,Filet mignon,Western,North American
+fish_and_chips,Fish and chips,Western,Other European
+foie_gras,Foie gras,Western,French
+french_fries,French fries,Western,North American
+french_onion_soup,French onion soup,Western,French
+french_toast,French toast,Western,French
+fried_calamari,Fried calamari,Other,International
+fried_rice,Fried rice,East Asian,East Asian
+frozen_yogurt,Frozen yogurt,Other,International
+garlic_bread,Garlic bread,Western,Italian
+gnocchi,Gnocchi,Western,Italian
+greek_salad,Greek salad,Western,Other European
+grilled_cheese_sandwich,Grilled cheese sandwich,Western,North American
+grilled_salmon,Grilled salmon,Other,International
+guacamole,Guacamole,Latin American,Latin American
+gyoza,Gyoza,East Asian,East Asian
+hamburger,Hamburger,Western,North American
+hot_and_sour_soup,Hot and sour soup,East Asian,East Asian
+hot_dog,Hot dog,Western,North American
+huevos_rancheros,Huevos rancheros,Latin American,Latin American
+hummus,Hummus,Middle Eastern,Middle Eastern
+ice_cream,Ice cream,Other,International
+lasagna,Lasagna,Western,Italian
+lobster_bisque,Lobster bisque,Western,French
+lobster_roll_sandwich,Lobster roll sandwich,Western,North American
+macaroni_and_cheese,Macaroni and cheese,Western,North American
+macarons,Macarons,Western,French
+miso_soup,Miso soup,East Asian,East Asian
+mussels,Mussels,Western,French
+nachos,Nachos,Western,North American
+omelette,Omelette,Western,French
+onion_rings,Onion rings,Western,North American
+oysters,Oysters,Other,International
+pad_thai,Pad thai,East Asian,Southeast Asian
+paella,Paella,Western,Other European
+pancakes,Pancakes,Western,North American
+panna_cotta,Panna cotta,Western,Italian
+peking_duck,Peking duck,East Asian,East Asian
+pho,Pho,East Asian,Southeast Asian
+pizza,Pizza,Western,Italian
+pork_chop,Pork chop,Other,International
+poutine,Poutine,Western,North American
+prime_rib,Prime rib,Western,North American
+pulled_pork_sandwich,Pulled pork sandwich,Western,North American
+ramen,Ramen,East Asian,East Asian
+ravioli,Ravioli,Western,Italian
+red_velvet_cake,Red velvet cake,Western,North American
+risotto,Risotto,Western,Italian
+samosa,Samosa,South Asian,South Asian
+sashimi,Sashimi,East Asian,East Asian
+scallops,Scallops,Other,International
+seaweed_salad,Seaweed salad,East Asian,East Asian
+shrimp_and_grits,Shrimp and grits,Western,North American
+spaghetti_bolognese,Spaghetti bolognese,Western,Italian
+spaghetti_carbonara,Spaghetti carbonara,Western,Italian
+spring_rolls,Spring rolls,East Asian,Southeast Asian
+steak,Steak,Other,International
+strawberry_shortcake,Strawberry shortcake,Western,North American
+sushi,Sushi,East Asian,East Asian
+tacos,Tacos,Latin American,Latin American
+takoyaki,Takoyaki,East Asian,East Asian
+tiramisu,Tiramisu,Western,Italian
+tuna_tartare,Tuna tartare,Western,French
+waffles,Waffles,Western,Other European

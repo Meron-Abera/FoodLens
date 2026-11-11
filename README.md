@@ -25,9 +25,15 @@ FoodLens/
 │   ├── paths.py                 # all data and output locations, relative to the repo
 │   ├── data/
 │   │   ├── download.py          # downloads Food-101 into data/food-101
-│   │   └── food101_data.py      # PyTorch Dataset used for training
+│   │   ├── food101_data.py      # loads the cleaned index, PyTorch Dataset and DataLoaders
+│   │   └── transforms.py        # preprocessing and augmentation
 │   └── models/
+│       ├── architectures.py     # EfficientNet-B0 with a 101-class head; checkpoint loading
+│       ├── losses.py            # focal loss
+│       ├── train.py             # fine-tuning loop
+│       ├── evaluate.py          # test predictions and overall metrics
 │       └── export_coreml.py     # converts a trained model to Core ML for the app
+├── tests/                       # unit tests (pytest)
 ├── ios/                         # SwiftUI app (see ios/README.md)
 ├── data/                        # dataset and derived index (not committed)
 ├── outputs/full/                # test predictions and results (checkpoints not committed)
@@ -53,7 +59,7 @@ python -m src.data.download        # ~5 GB; skipped if data/food-101 already exi
 
 ## Running
 
-Run the notebooks in order from Jupyter, VS Code or PyCharm, using the `.venv` environment.
+Run the notebooks in order from Jupyter, VS Code or PyCharm, using the `.venv` environment. The notebooks explain each step and call the reusable code in `src/`.
 
 | Step | What it does | Output | Time |
 |---|---|---|---|
@@ -72,6 +78,14 @@ Run the notebooks in order from Jupyter, VS Code or PyCharm, using the `.venv` e
 - `<model>.pt`: the best checkpoint by validation accuracy
 
 and `overall_results.csv` comparing both models. The CSV and `.npy` files from the full run are committed, so the audit can be run without retraining; checkpoints are not.
+
+## Tests
+
+```bash
+python -m pytest
+```
+
+The tests cover the data loading, preprocessing, focal loss, training loop, checkpoint loading, evaluation, Core ML wrapper and data download. They use small generated data, so they run in about 10 seconds on a CPU and don't need the Food-101 download.
 
 ## Models
 

@@ -19,3 +19,6 @@ coremltools==9.0; sys_platform != "win32"
 
 # Runs the notebooks in Jupyter, VS Code or PyCharm
 ipykernel==7.3.0
+
+# Tests (run with: python -m pytest)
+pytest==9.2.0

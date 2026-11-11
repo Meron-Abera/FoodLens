@@ -145,8 +145,9 @@ def bootstrap_group_accuracy(df, n_boot=1000, seed=42):
     """
     rng = np.random.default_rng(seed)
     samples = {}
+    correct_all = df['correct'].to_numpy()
     for group, idx in df.groupby(GROUP_COL).indices.items():
-        correct = df['correct'].to_numpy()[idx]
+        correct = correct_all[idx]
         draws = rng.integers(0, len(idx), size=(n_boot, len(idx)))
         samples[group] = correct[draws].mean(axis=1)
     return samples
@@ -196,26 +197,6 @@ def expected_calibration_error(conf, correct, n_bins=15):
     bins = np.clip(np.digitize(conf, edges[1:-1]), 0, n_bins - 1)
     return float(sum(abs(correct[bins == b].mean() - conf[bins == b].mean()) * (bins == b).mean()
                      for b in range(n_bins) if (bins == b).any()))
-
-
-def reliability_curve(conf, correct, n_bins=10):
-    """Mean confidence and accuracy in each non-empty confidence bin.
-
-    Args:
-        conf: Confidence of each prediction.
-        correct: Whether each prediction was right.
-        n_bins: Number of equal-width confidence bins.
-
-    Returns:
-        DataFrame with ``confidence``, ``accuracy`` and ``count`` per bin.
-    """
-    conf, correct = np.asarray(conf, dtype=float), np.asarray(correct, dtype=float)
-    edges = np.linspace(0, 1, n_bins + 1)
-    bins = np.clip(np.digitize(conf, edges[1:-1]), 0, n_bins - 1)
-    frame = pd.DataFrame({'bin': bins, 'confidence': conf, 'accuracy': correct})
-    return frame.groupby('bin').agg(confidence=('confidence', 'mean'),
-                                    accuracy=('accuracy', 'mean'),
-                                    count=('accuracy', 'size'))
 
 
 def calibration_by_group(df, n_bins=15):

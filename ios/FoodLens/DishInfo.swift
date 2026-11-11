@@ -35,7 +35,7 @@ struct DishInfoStore {
         let cuisineRows = Self.readCSV("cuisine_map", bundle: bundle)
         let reliabilityRows = Self.readCSV("cuisine_reliability", bundle: bundle)
 
-        nutrition = Dictionary(uniqueKeysWithValues: nutritionRows.compactMap { row in
+        nutrition = Dictionary(nutritionRows.compactMap { row in
             guard let label = row["label"], let serving = row["serving"],
                   let calories = row["calories_kcal"].flatMap(Int.init),
                   let protein = row["protein_g"].flatMap(Int.init),
@@ -43,11 +43,11 @@ struct DishInfoStore {
                   let fat = row["fat_g"].flatMap(Int.init) else { return nil }
             return (label, Nutrition(serving: serving, calories: calories,
                                      proteinGrams: protein, carbsGrams: carbs, fatGrams: fat))
-        })
-        cuisineByLabel = Dictionary(uniqueKeysWithValues: cuisineRows.compactMap { row in
+        }, uniquingKeysWith: { first, _ in first })
+        cuisineByLabel = Dictionary(cuisineRows.compactMap { row in
             guard let label = row["label"], let group = row["cuisine_group"] else { return nil }
             return (label, group)
-        })
+        }, uniquingKeysWith: { first, _ in first })
 
         var accuracyByGroup: [String: Double] = [:]
         var flagged: [String: Double] = [:]
@@ -86,7 +86,7 @@ struct DishInfoStore {
         let lines = text.components(separatedBy: .newlines).filter { !$0.isEmpty }
         guard let header = lines.first?.components(separatedBy: ",") else { return [] }
         return lines.dropFirst().map { line in
-            Dictionary(uniqueKeysWithValues: zip(header, line.components(separatedBy: ",")))
+            Dictionary(zip(header, line.components(separatedBy: ",")), uniquingKeysWith: { first, _ in first })
         }
     }
 }

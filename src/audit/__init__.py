@@ -12,7 +12,6 @@ from .metrics import (
     most_confused_pairs,
     paired_gap_change,
     per_dish_metrics,
-    reliability_curve,
     representation_table,
     save_cuisine_reliability,
     validate_audit_frame,

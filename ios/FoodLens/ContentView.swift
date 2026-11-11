@@ -53,19 +53,29 @@ struct ContentView: View {
         }
     }
 
+    /// Height of the photo, kept small so the result card fits below it.
+    private static let photoHeight: CGFloat = 260
+
     /// The selected photo, or a placeholder before one is chosen.
     @ViewBuilder
     private var photoArea: some View {
         if let image = viewModel.image {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
+            // Fill a fixed-height frame and crop the overflow. The image sits in an overlay
+            // so its filled size can't widen the layout.
+            Color.clear
+                .frame(maxWidth: .infinity)
+                .frame(height: Self.photoHeight)
+                .overlay {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 16))
         } else {
             ContentUnavailableView("No photo yet",
                                    systemImage: "fork.knife",
                                    description: Text("Take or choose a photo of a dish to identify it."))
-                .frame(minHeight: 300)
+                .frame(minHeight: Self.photoHeight)
         }
     }
 

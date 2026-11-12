@@ -1,4 +1,4 @@
-# Python packages for the FoodLens notebooks and scripts (tested with Python 3.13).
+# Python packages for the FoodLens notebooks and scripts (tested with Python 3.14).
 # Install into a fresh virtual environment:
 #   python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 
